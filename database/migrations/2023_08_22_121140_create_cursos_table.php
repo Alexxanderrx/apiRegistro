@@ -16,16 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->unsignedBigInteger('docente_id');
             $table->foreign('docente_id')->references('id')->on('docentes');
-            $table->timestamps();
-        });
-
-        Schema::create('cursos_alumnos', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('cursos_id');
-            $table->foreign('cursos_id')->references('id')->on('cursos');
-            $table->unsignedBigInteger('alumnos_id');
-            $table->foreign('alumnos_id')->references('id')->on('alumnos');
-            $table->char('asistencia', 1);
+            $table->boolean('state');
             $table->timestamps();
         });
     }
@@ -36,6 +27,5 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('cursos');
-        Schema::dropIfExists('cursos_alumnos');
     }
 };
