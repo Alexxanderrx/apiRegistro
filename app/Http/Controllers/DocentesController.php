@@ -45,15 +45,13 @@ class DocentesController extends Controller
                     if ($request->name) {
                         $actualizarDocente->name = $request->name;
                     }
-                    if ($request->state == 1 || $request->state == 0) {
-                        $actualizarDocente->state = $request->state;
-                    } else {
-                        return "'state' solo acepta los valores 0 o 1.\n 'state' sin modificaciones.\n";
+                    if ($request->state) {
+                        if ($request->state == 1 || $request->state == 0) {
+                            $actualizarDocente->state = $request->state;
+                        } else {
+                            return "'state' solo acepta los valores 0 o 1.\n 'state' sin modificaciones.\n";
+                        }
                     }
-                    // $actualizarDocente->update($request->all());
-
-                    // var_dump($request->state);
-                    // var_dump($actualizarDocente->state);
 
                     $actualizarDocente->save();
                     return "Registro " . $id . " se ha actualizado.";

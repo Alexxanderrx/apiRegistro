@@ -45,15 +45,13 @@ class AlumnosController extends Controller
                     if ($request->name) {
                         $actualizarAlumno->name = $request->name;
                     }
-                    if ($request->state == 1 || $request->state == 0) {
-                        $actualizarAlumno->state = $request->state;
-                    } else {
-                        return "'state' solo acepta los valores 0 o 1.\n 'state' sin modificaciones.\n";
+                    if ($request->state) {
+                        if ($request->state == 1 || $request->state == 0) {
+                            $actualizarAlumno->state = $request->state;
+                        } else {
+                            return "'state' solo acepta los valores 0 o 1.\n 'state' sin modificaciones.\n";
+                        }
                     }
-                    // $actualizarAlumno->update($request->all());
-
-                    // var_dump($request->state);
-                    // var_dump($actualizarAlumno->state);
 
                     $actualizarAlumno->save();
                     return "Registro " . $id . " se ha actualizado.";

@@ -34,7 +34,6 @@ class CursosController extends Controller
             // echo ($body->docente_id);
 
             $DocentesAll = Docentes::where('state', '=', 1)->where('id', '=', $body->docente_id)->get();
-
             if (count($DocentesAll) == 0) {
                 return "No existe un docente con ese 'docente_id', porfavor ingrese un 'docente_id' valido.";
             } else {
@@ -66,16 +65,13 @@ class CursosController extends Controller
                             $actualizarCurso->docente_id = $request->docente_id;
                         }
                     }
-                    if ($request->state == 1 || $request->state == 0) {
-                        $actualizarCurso->state = $request->state;
-                    } else {
-                        return "'state' solo acepta los valores 0 o 1.\n 'state' sin modificaciones.\n";
+                    if ($request->state) {
+                        if ($request->state == 1 || $request->state == 0) {
+                            $actualizarCurso->state = $request->state;
+                        } else {
+                            return "'state' solo acepta los valores 0 o 1.\n 'state' sin modificaciones.\n";
+                        }
                     }
-                    // $actualizarCurso->update($request->all());
-
-                    // var_dump($request->state);
-                    // var_dump($actualizarCurso->state);
-
                     $actualizarCurso->save();
                     return "Registro " . $id . " se ha actualizado.";
                 }
